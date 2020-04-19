@@ -38,7 +38,7 @@ function draw() {
   //Creating zooming out effect
   amount -= amount / 100
   //Adding an endpoint
-  if (amount < 0.00001) {
+  if (amount < 0.0001) {
     noLoop()
     print("Finished")
     capturer.stop()
