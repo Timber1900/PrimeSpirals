@@ -4,12 +4,14 @@ let fps = 60
 let capturer = new CCapture({ format: 'png', framerate: fps });
 
 function preload() {
+  //Load primes from txt
   primes_raw = loadStrings('primes1.txt')
 }
 
 function setup() {
   createCanvas(1080, 1080);
   capturer.start();
+  //Formating the string
   pre = " "
   cur_numb = ""
   primes = []
@@ -33,7 +35,9 @@ function setup() {
 }
 
 function draw() {
+  //Creating zooming out effect
   amount -= amount / 100
+  //Adding an endpoint
   if (amount < 0.00001) {
     noLoop()
     print("Finished")
@@ -41,6 +45,7 @@ function draw() {
     capturer.save()
   }
   background(0);
+  //Drawing Spirals
   push()
   translate(width / 2, height / 2)
   fill(255)
@@ -49,11 +54,13 @@ function draw() {
     let x = numb * cos(numb) * amount
     let y = numb * sin(numb) * amount
     ellipse(x, y, 2, 2)
+    //Stoping the drawing of points not on canvas
     if (dist(0, 0, x, y) * amount > width / 2) {
       break
     }
   }
   pop()
+  //Capturing the frame
   capturer.capture(document.getElementById('defaultCanvas0'));
 
 }
